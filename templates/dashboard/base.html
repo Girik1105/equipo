@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>{{ user.username }}</title>
+
+    {% include "dashboard/snippets/head.html" %}
+
+</head>
+<body>
+    <div class="container-all">
+
+        {% include "dashboard/snippets/navbar.html" %}
+
+        <div class="sidebar">
+            <ul class="side-nav">
+                <li class="">
+                    <a href="{% url 'dashboard:index' %}">
+                        <span class="nav-logo"><i class="bi bi-house"></i></span>
+                        <span class="side-text">Home</span>
+                    </a>
+                </li>
+                <li class="{% block org_active %}{% endblock org_active %}">
+                    <a href="#">
+                    <span class="nav-logo"><i class="bi bi-building"></i></span>
+                    <span class="side-text">Organizations</span>
+                    </a>
+                </li>
+                <li class="{% block doodle_active %}{% endblock doodle_active %}">
+                    <a href="{% url 'dashboard:doodles' %}">
+                    <span class="nav-logo"><i class="bi bi-pencil-square"></i></span>
+                    <span class="side-text">Doodle Zone</span>
+                    </a>
+                </li>
+                <li class="{% block todo_active %}{% endblock todo_active %}">
+                    <a href="{% url 'dashboard:todo' %}">
+                    <span class="nav-logo"><i class="bi bi-card-checklist"></i></span>
+                    <span class="side-text">To-do</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main">
+            {% block maincontent %}
+          
+            {% endblock maincontent %}
+        </div>
+        
+        {% include "dashboard/snippets/footer.html" %}
+
+    </div>
+</body>
+</html>

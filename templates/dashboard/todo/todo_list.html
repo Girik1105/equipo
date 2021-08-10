@@ -1,0 +1,48 @@
+{% extends "dashboard/base.html" %}
+
+{% block todo_active %}active{% endblock todo_active %}
+
+{% block maincontent %}
+
+<div class="content-holder">
+  <h1 class="content-holder-left title-text">To-do</h1>
+  <button class="content-holder-right scope-btn doodle-new-btn"><a href="{% url 'dashboard:todo-create' %}">New <i class="bi bi-pencil-fill"></i></a></button>
+</div>
+
+<table class="table-balancer table table-borderless">
+    <thead>
+      <tr class="text-center">
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Added On</th>
+        <th scope="col">Due on</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+        {% for item in all_todo  %}
+        {% if not item.is_complete %}
+        <tr>
+            <td>{{ item.title }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.created_on|timesince }} ago</td>
+            <td>{{ item.due_date|date:"d M Y" }}</td>
+            <td><a class="blue-btn" href="{% url 'dashboard:todo-complete' item.pk %}">Finish</a></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td>{{ item.title }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.created_on|timesince }} ago</td>
+            <td>{{ item.due_date|date:"d M Y" }}</td>
+            <td><a class="scope-btn">Completed</a></td>
+        </tr>
+        {% endif %}
+    {% empty %}
+         <td>No Doodles!</td>
+         <td>Add one now!</td>
+         <td><i class="bi bi-arrow-up-circle-fill"></i></td>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock maincontent %}

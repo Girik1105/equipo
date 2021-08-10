@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>{{ user.username }}</title>
+
+    {% include "dashboard/snippets/head.html" %}
+
+</head>
+<body>
+    <div class="home-container">
+
+        {% include "dashboard/snippets/navbar.html" %}
+
+        <div class="sidebar">
+            <ul class="side-nav">
+                <li class="active">
+                    <a href="{% url 'dashboard:index' %}">
+                        <span class="nav-logo"><i class="bi bi-house"></i></span>
+                        <span class="side-text">Home</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                    <span class="nav-logo"><i class="bi bi-building"></i></span>
+                    <span class="side-text">Organizations</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'dashboard:doodles' %}">
+                    <span class="nav-logo"><i class="bi bi-pencil-square"></i></span>
+                    <span class="side-text">Doodle Zone</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{% url 'dashboard:todo' %}">
+                    <span class="nav-logo"><i class="bi bi-card-checklist"></i></span>
+                    <span class="side-text">To-do</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card card-balancer">
+            <span class="card-logo"><i class="bi bi-building"></i></span>
+            <span class="card-num">100</span>           
+        </div>
+        
+        <div class="card2 card-balancer">
+            <span class="card-logo"><i class="bi bi-journal"></i></span>
+            <span class="card-num">{{ doodles.count }}</span>
+        </div>
+        
+        <div class="card3 card-balancer">
+            <span class="card-logo"><i class="bi bi-list-task"></i></span>
+            <span class="card-num">{{ todo.count }}</span>
+        </div>
+
+        <div class="main-home">
+            <table class="table table-borderless container-fluid border shadow-sm mt-2">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+
+        {% include "dashboard/snippets/footer.html" %}
+
+    </div>
+</body>
+</html>

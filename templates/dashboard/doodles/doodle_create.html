@@ -1,0 +1,18 @@
+{% extends "dashboard/base.html" %}
+
+{% load bootstrap4 %}
+
+{% block maincontent %}
+<div class="conatiner">
+  <div class="title-text">
+    Create a new Doodle
+  </div>
+    <form method="POST" class="container-fluid">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {{ form.media }}
+        <button class="blue-btn" type="submit">Add New Doodle <i class="bi bi-stack"></i></button>
+        <button class="blue-btn red-btn"><a href="{% url 'dashboard:doodles' %}">No, go back <i class="bi bi-arrow-left"></i></a></button>
+      </form>
+</div>
+{% endblock maincontent %}

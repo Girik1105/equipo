@@ -1,0 +1,35 @@
+{% extends "dashboard/base.html" %}
+
+{% block doodle_active %}active{% endblock doodle_active %}
+
+{% block maincontent %}
+
+<div class="content-holder">
+  <h1 class="content-holder-left title-text">Your Doodles</h1>
+  <button class="content-holder-right scope-btn doodle-new-btn"><a href="{% url 'dashboard:create-doodle' %}">New <i class="bi bi-pencil-fill"></i></a></button>
+</div>
+
+<table class="table-balancer table table-borderless">
+    <thead>
+      <tr class="text-center">
+        <th scope="col">Title</th>
+        <th scope="col">Created On</th>
+        <th scope="col">View</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+    {% for item in all_doodles  %}
+        <tr>
+            <td>{{ item.title }}</td>
+            <td>{{ item.timestamp|timesince }} ago</td>
+            <td><a class="blue-btn" href="{% url 'dashboard:doodles-detail' item.pk %}">View</a></td>
+        </tr>
+    {% empty %}
+         <td>No Doodles!</td>
+         <td>Add one now!</td>
+         <td><i class="bi bi-arrow-up-circle-fill"></i></td>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock maincontent %}

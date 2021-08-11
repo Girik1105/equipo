@@ -1,13 +1,27 @@
 <div class="navbar">
     <div class="nav-left">
         <div class="nav-pic">
-            <img src="https://www.unmc.edu/cihc/_images/faculty/default.jpg" alt="">
+            <img src="{{ user.profile.profile_picture.url }}" alt="">
         </div>
         <div class="nav-name">
             Welcome back! <br>
             <span class="smaller-text">@{{ user.username }}</span>
         </div>    
+
+        {% if messages %}
+        <div class="container pt-3">
+            {% for message in messages %}
+                <div class="alert alert-primary" role="alert">{{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+        
     </div>
+
     <div class="nav-right">
         <a href="{% url 'account_logout' %}"><i class="bi bi-box-arrow-right"></i></a>
     </div>

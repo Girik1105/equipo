@@ -1,0 +1,29 @@
+{% extends "dashboard/base.html" %}
+
+{% load bootstrap4 %}
+
+{% block maincontent %}
+<div class="conatiner">
+  
+  <div class="center-content">
+    <h1 class="mt-4">{{ todo.title }}</h1>
+    <p class="smaller-text text-muted">{{ todo.created_on }}</p>
+    <p><b>Task:</b> {{ todo.description }}</p>
+  </div>
+
+  <div class="title-text">
+    Delete task?
+  </div>
+  <div class="text-muted smaller-text">This action can't be undone!</div>
+
+    <form method="POST" class="container-fluid">
+      {% csrf_token %}
+        <div class="mt-3">
+            <button class="blue-btn" type="submit">Yes please!<i class="bi bi-eyeglasses"></i></i></button>
+            <button class="blue-btn red-btn ml-3"><a href="{% url 'dashboard:todo' %}">No, Don't! <i class="bi bi-arrow-left"></i></a></button>
+        </div>
+      </form>
+
+
+</div>
+{% endblock maincontent %}

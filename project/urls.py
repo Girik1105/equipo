@@ -19,11 +19,22 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from . import views
+from accounts.views import account_signup_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    path("accounts/signup/", view=account_signup_view, name='register'),
     path('accounts/', include('allauth.urls')),
+    
+    path('user/profile/', include('accounts.urls')),
     path('dashboard/', include('dashboard.urls')),
+    path('organizations/', include('organization.urls')),
 ]
+
+handler404 = 'project.views.error_404'
+handler403 = 'project.views.error_403'
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,0 +1,11 @@
+{% extends "organization/base.html" %}
+
+{% load bootstrap4 %}
+
+{% block maincontent %}
+    <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}    
+        {% bootstrap_form org_form %}
+        <button class="blue-btn">New begining</button>
+    </form>
+{% endblock maincontent %}

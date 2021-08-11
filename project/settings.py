@@ -63,9 +63,9 @@ INSTALLED_APPS = [
     'ckeditor',
     'bootstrap4',
 
+    'accounts',
     'dashboard',
     'organization',
-    'work',
 ]
 
 MIDDLEWARE = [
@@ -93,7 +93,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR,],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -101,8 +101,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
-                'django.template.context_processors.request',
             ],
         },
     },
@@ -154,6 +152,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory' 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -164,6 +164,8 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 DATE_INPUT_FORMATS = ('%d/%m/%Y','%Y/%m/%d', '%d-%m-%Y','%Y-%m-%d')
 
 STATIC_URL = '/static/'
@@ -173,5 +175,5 @@ STATIC_ROOT= os.path.join(BASE_DIR,'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_REDIRECT_URL = "account_login"
+LOGIN_REDIRECT_URL = "dashboard:index"
 # LOGOUT_REDIRECT_URL = "index"

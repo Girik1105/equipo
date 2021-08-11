@@ -1,0 +1,25 @@
+{% extends "dashboard/base.html" %}
+
+{% block org_active %}active{% endblock org_active %}
+
+{% block maincontent %}
+<div class="title">
+    Your Organizations
+</div>
+<div class="lg-card-holder">
+    {% for org in organizations %}
+    <div class="lg-card">
+        <div class="lg-card-img-holder"><img src="{{ org.cover.url }}" alt=""></div>
+        <div class="lg-card-text">
+            {{ org.name }}
+        </div>   
+        <div class="lg-card-desc">
+            {{ org.description }}
+        </div>   
+        <div>
+            <button class="blue-btn"><a  href="{% url 'org:detail-org' org.slug %}">View</a></button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock maincontent %}

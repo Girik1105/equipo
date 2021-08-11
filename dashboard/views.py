@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
 from . import models, forms
+from organization.models import Member, organization
 # Create your views here.
 
 # Homepage
@@ -128,3 +129,25 @@ def complete_todo(request, pk):
     todo.save()
     context = {}
     return redirect('dashboard:todo')
+
+@login_required
+def delete_todo(request, pk):
+    todo = models.to_do.objects.get(user=request.user, pk=pk)
+    if request.method == 'POST':
+        todo.delete()
+        return redirect('dashboard:todo')
+    context = {
+        "todo": todo,
+    }
+    return render(request, 'dashboard/todo/todo_delete.html', context)
+
+@login_required
+def show_organizations(request):
+    
+    orgs = organization.objects.filter(members=request.user)
+
+    context = {
+        'organizations':orgs
+    }
+
+    return render(request, 'dashboard/organizations/org_list.html', context)

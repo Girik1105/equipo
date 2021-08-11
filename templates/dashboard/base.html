@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <li class="{% block org_active %}{% endblock org_active %}">
-                    <a href="#">
+                    <a href="{% url 'dashboard:list-organizations' %}">
                     <span class="nav-logo"><i class="bi bi-building"></i></span>
                     <span class="side-text">Organizations</span>
                     </a>
@@ -38,6 +38,12 @@
                     <span class="side-text">To-do</span>
                     </a>
                 </li>
+                <li class="{% block profile_active %}{% endblock profile_active %}">
+                    <a href="{% url 'edit-user-profile' %}">
+                    <span class="nav-logo"><i class="bi bi-gear"></i></span>
+                    <span class="side-text">Account</span>
+                    </a>
+                </li>
             </ul>
         </div>
 
@@ -48,6 +54,8 @@
         </div>
         
         {% include "dashboard/snippets/footer.html" %}
+
+        {% include "dashboard/snippets/scripts.html" %}
 
     </div>
 </body>

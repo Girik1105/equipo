@@ -1,0 +1,45 @@
+{% extends "organization/base.html" %}
+
+{% load bootstrap4 %}
+
+{% block maincontent %}
+
+
+<div class="container">
+    <h1>{{ item.name }}</h1> <br>
+    <p>{{ item.description }}</p>
+</div>
+
+<div class="container">
+    
+<p>Admin {{ item.owner }}</p>
+
+</div>
+
+<div class="container">
+    
+<h1>Admins</h1>
+{% for user in item.admins.all %}
+  <p>{{user.username}}</p>
+{% endfor %}
+
+</div>
+
+<div class="container">
+    <h1>members</h1>
+{% for user in item.members.all %}
+  <p>{{user.username}}</p><br>
+{% endfor %}
+
+</div>
+
+<div class="container">
+    <form method="POST">
+        {{ member_form.as_p }}
+        {% csrf_token %}
+        <input type="submit">
+    </form>
+    
+</div>
+
+{% endblock maincontent %}

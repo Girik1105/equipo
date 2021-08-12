@@ -56,3 +56,21 @@ def org_save_member(sender, instance, created, *args, **kwargs):
     if not Member.objects.filter(user=instance.owner, organization=instance).exists():
         Member.objects.create(user=instance.owner, organization=instance, is_verified=True)
 
+
+
+class work(models.Model):
+    organization = models.ForeignKey(organization, related_name='organization', on_delete = models.CASCADE)
+    creator = models.ForeignKey(User, related_name='assigner', on_delete = models.CASCADE)
+    title = models.CharField(max_length=150)
+    description = models.TextField()
+    assigned_to = models.ForeignKey(Member, related_name="work", blank=True, null=True ,on_delete=models.SET_NULL)
+    files= models.FileField(blank=True, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    due_date = models.DateField()
+    is_complete = models.BooleanField()
+
+    def __str__(self):
+        return self.title
+    
+    class Meta():
+        ordering = ["-created_on", 'is_complete']

@@ -1,0 +1,210 @@
+.blue-btn {
+    border: none;
+    background-color: aqua;
+    padding: 1em 2em;
+    border-radius: 1em;
+}
+
+.main-area{
+    display: grid;
+    grid-template-columns:0.6fr 1.2fr 0.6fr;
+    grid-template-rows: 0.2fr 1.4fr;
+    grid-template-areas:"navbar     navbar        navbar"
+                        "sidebar    sub-content   right-panel";  
+                        grid-gap: 0.4rem;
+                        border-radius: 1em;
+    width: 100%;            
+    height: 99vh;
+    background: linear-radient(to top right,rgba(255,255,255,.5),rgba(255,255,255,.5));
+}
+
+.navbar {
+    grid-area: navbar;
+}
+
+.navbar .nav-comp {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 40%;
+    padding: 0.2rem;
+    margin: 0.6rem 0.5rem;
+}
+
+.navbar .nav-comp .nav-comp-img{
+    height: 100%;
+    width: 20%;
+}
+
+.navbar .nav-comp .nav-comp-img img{
+    border-radius: 100%;
+    width: 5rem;
+    height: 5rem;
+}
+
+.navbar .nav-comp .nav-comp-info {
+    margin: auto 0.8rem;
+    font-size: 1.8rem;
+    font-weight: 900;
+    height: 100%;
+    width: 80%;
+}
+
+.side-panel {
+    grid-area: sidebar;
+}
+
+.db-btn-holder {
+    margin: 0.2rem;
+    padding: 0.4rem;
+    display: flex;
+    justify-content: center;
+}
+
+.member-holder {
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.member-holder .member {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 95%;
+    padding: 0.2rem;
+    margin: 0.6rem 0.5rem;
+}
+
+.member-holder .member .member-img{
+    height: 100%;
+    width: 30%;
+}
+
+.member-holder .member .member-img img{
+    border-radius: 100%;
+    width: 5rem;
+    height: 5rem;
+}
+
+.member-holder .member .member-info{
+    margin: auto 0;
+    height: 100%;
+    width: 70%;
+}
+
+.member-holder .org-status{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.2rem;
+    margin: 0.5rem;
+}
+
+.member-holder .org-status h1{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.work-area {
+    grid-area: sub-content;
+}
+
+.status-symbol{
+    width: auto;
+    padding: 0.5rem 1rem;
+    margin: 0 0.2rem;
+    border: none;
+    border-radius: 2em;
+}
+
+.status-green{
+    background-color: #7ff77f;
+    box-shadow: 0 0.5em 0.5em -0.4em palegreen;
+    color: rgb(248, 248, 248);
+}
+
+.status-yellow{
+    background-color: rgb(251, 233, 152);
+    box-shadow: 0 0.5em 0.5em -0.4em rgb(251, 233, 152);
+    color: rgb(248, 248, 248);
+}
+
+.status-red {
+    background-color: #fc5c5c;
+    box-shadow: 0 0.5em 0.5em -0.4em #fc5c5c;
+    color: rgb(248, 248, 248);  
+}
+
+.right-panel {
+    grid-area: right-panel;
+}
+
+
+@media screen and (max-width: 1150px){
+    .main-area{
+        display: grid;
+        grid-template-columns:0.6fr 1.2fr;
+        grid-template-rows: 0.2fr 1.4fr;
+        grid-template-areas:"navbar      navbar"
+                            "sidebar    sub-content";  
+                            grid-gap: 0.4rem;
+                            border-radius: 1em;
+        width: 100%;            
+        height: 99vh;
+        background: linear-radient(to top right,rgba(255,255,255,.5),rgba(255,255,255,.5));
+    }
+    .navbar .nav-comp .nav-comp-info {
+        margin: auto 0 auto 1rem;
+        font-size: 1.8rem;
+        font-weight: 900;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 850px){
+    .main-area{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.2fr 0.8fr 1.2fr 0.8fr;
+        grid-template-areas:"navbar"
+                            "sidebar"
+                            "sub-content"
+                            "right-panel";  
+                            grid-gap: 0.4rem;
+                            border-radius: 1em;
+        width: 100%;            
+        height: 99vh;
+        background: linear-radient(to top right,rgba(255,255,255,.5),rgba(255,255,255,.5));
+    }
+    .member-holder {
+        justify-content: center;
+    }
+    .member-holder .member{
+        justify-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+    .member-holder .member .member-img{
+        width: 12%;
+    }
+    .member-holder .member .member-info{
+        width: 40%;
+    }
+    .navbar .nav-comp .nav-comp-info {
+        position: absolute;
+        display: none;
+    }
+}
+
+@media screen and (max-width: 750px){
+    .member-holder .member .member-img{
+        width: 25%;
+    }
+    .member-holder .member .member-info{
+        width: 40%;
+    }
+}
+

@@ -3,9 +3,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
+from django.http import Http404
+
 from . import models, forms
 from organization.models import Member, organization
-# Create your views here.
+
+import io
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
 
 # Homepage
 @login_required
@@ -49,16 +54,41 @@ def list_doodle(request):
 
 @login_required
 def detail_doodle(request, pk):
-    doodle = models.doodle.objects.get(user=request.user, pk=pk)
+    try:
+        doodle = models.doodle.objects.get(user=request.user, pk=pk)
+    except:
+        raise Http404
+
     context = {
         'doodle':doodle
     }
     return render(request, 'dashboard/doodles/doodle_detail.html', context)
 
+
+def download_doodle(request, pk):
+    try:
+        obj = models.doodle.objects.get(user=request.user, pk=pk)
+    except:
+        raise Http404
+        
+    buffer = io.BytesIO()
+    p = canvas.Canvas(buffer)
+    p.drawString(100, 100, obj.title)
+    p.drawString(150, 150, obj.body)
+
+    p.showPage()
+    p.save()
+
+    title = f"{ obj.title }.pdf"
+    buffer.seek(0)
+    return FileResponse(buffer, as_attachment=True, filename=title)
+
 @login_required
 def edit_doodle(request, pk):
-   
-    doodle = models.doodle.objects.get(user=request.user, pk=pk)
+    try:
+        doodle = models.doodle.objects.get(user=request.user, pk=pk)
+    except:
+        raise Http404
     
     doodle_form = forms.doodle_form(instance=doodle)
     if request.method == 'POST':
@@ -78,8 +108,10 @@ def edit_doodle(request, pk):
 
 @login_required
 def delete_doodle(request, pk):
-   
-    doodle = models.doodle.objects.get(user=request.user, pk=pk)
+    try:
+        doodle = models.doodle.objects.get(user=request.user, pk=pk)
+    except:
+        raise Http404
     
     if request.method == 'POST':
         if request.user == doodle.user:
@@ -124,7 +156,10 @@ def list_todo(request):
 
 @login_required
 def complete_todo(request, pk):
-    todo = models.to_do.objects.get(user=request.user, pk=pk)
+    try:
+        todo = models.to_do.objects.get(user=request.user, pk=pk)
+    except:
+        raise Http404
     todo.is_complete = True
     todo.save()
     context = {}
@@ -132,7 +167,10 @@ def complete_todo(request, pk):
 
 @login_required
 def delete_todo(request, pk):
-    todo = models.to_do.objects.get(user=request.user, pk=pk)
+    try:
+        todo = models.to_do.objects.get(user=request.user, pk=pk)
+    except:
+        raise Http404
     if request.method == 'POST':
         todo.delete()
         return redirect('dashboard:todo')

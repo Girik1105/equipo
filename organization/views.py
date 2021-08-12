@@ -73,10 +73,10 @@ def detail_organization(request, slug):
     form = forms.add_member()
 
     if request.method == "POST":
-        if request.user == org.owner or request.user in org.admins.all:
+        if request.user == org.owner or request.user in org.admins.all():
             form = forms.add_member(request.POST)
             if form.is_valid():
-                if form.instance.user not in models.Member.objects.filter(organization=org):
+                if form.instance.user not in org.members.all():
                     form.save(commit=False)
                     form.instance.organization = org
                     form.instance.is_verified = True

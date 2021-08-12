@@ -3,8 +3,9 @@
 {% block doodle_active %}active{% endblock doodle_active %}
 
 {% block maincontent %}
-    <button class="scope-btn"><a href="{% url 'dashboard:doodles-edit' doodle.pk %}">Edit <i class="bi bi-pencil"></i></a></button>
-    <button class="red-btn scope-btn"><a href="{% url 'dashboard:doodles-delete' doodle.pk %}">Delete <i class="bi bi-trash2-fill"></i></a></button>
+    <button class="scope-btn"><a href="{% url 'dashboard:doodles-edit' doodle.pk %}"><i class="bi bi-pencil"></i></a></button>
+    <button class="blue-btn"><a href="{% url 'dashboard:download-doodle' doodle.pk %}"><i class="bi bi-file-earmark-arrow-down-fill"></i></a></button>
+    <button class="red-btn scope-btn"><a href="{% url 'dashboard:doodles-delete' doodle.pk %}"><i class="bi bi-trash2-fill"></i></a></button>
     <h1>{{ doodle.title }}</h1>
     <p class="text-muted smaller-text">{{ doodle.timestamp }}</p>
     <div class="container smaller-text">

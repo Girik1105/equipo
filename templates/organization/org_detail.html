@@ -2,44 +2,122 @@
 
 {% load bootstrap4 %}
 
+{% block sidebar %}
+<div class="db-btn-holder">
+  <button class="blue-btn-org"><a href="{% url 'dashboard:index' %}">Go back to dsashboard</a></button> 
+</div>
+<div class="member-holder">
+  <div class="org-status">
+      <h1>Owner</h1>
+  </div>
+  <div class="member">
+      <div class="member-img"><img src="{{ item.owner.profile.profile_picture.url }}" alt=""></div>
+      <div class="member-info">
+        {{ item.owner.profile.name }} <br>
+        @{{ item.owner.username }}
+      </div>
+  </div>
+
+<div class="org-status">
+    <h1>Admins</h1>
+</div>
+{% for member in item.admins.all %}
+  <div class="member">
+      <div class="member-img"><img src="{{ member.profile.profile_picture.url }}" alt=""></div>
+      <div class="member-info">
+          {{ member.profile.name }} <br>
+          @{{ member.username }}
+      </div>
+  </div>
+{% empty %}
+<div class="container text-center">
+    <p>No admins yet!</p>
+</div>
+{% endfor %}
+
+<div class="org-status">
+    <h1>Members</h1>
+</div>
+{% for member in item.members.all %}
+  <div class="member">
+      <div class="member-img"><img src="{{ member.profile.profile_picture.url }}" alt=""></div>
+      <div class="member-info">
+          {{ member.profile.name }} <br>
+          @{{ member.username }}
+      </div>
+  </div>
+{% empty %}
+<div class="container text-center">
+    <p>No Members yet!</p>
+</div>
+{% endfor %}
+
+</div>
+{% endblock sidebar %}
+
+
 {% block maincontent %}
-
-
-<div class="container">
-    <h1>{{ item.name }}</h1> <br>
-    <p>{{ item.description }}</p>
+<div class="container shadow-sm">
+  <table class="text-center table table-borderless table-hover">
+      <thead>
+          <tr>
+            <th>Task</th>
+            <th>Created on</th>
+            <th>Due on</th>
+            <th>Status</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Complete work</td>
+            <td>today</td>
+            <td>Day after</td>
+            <td><button class="status-symbol status-green">Assigned</button></td>
+            <td><button class="blue-btn-org">View</button></td>
+          </tr>
+          <tr>
+              <td>Complete work</td>
+              <td>today</td>
+              <td>Day after</td>
+              <td><button class="status-symbol status-red">Not Assigned</button></td>
+              <td><button class="blue-btn-org">View</button></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
-<div class="container">
-    
-<p>Admin {{ item.owner }}</p>
-
+<div class="container shadow-sm">
+  <table class="text-center table table-borderless table-hover">
+      <thead>
+          <tr>
+            <th>Member</th>
+            <th>Tasks Assigned</th>
+            <th>Tasks Completed</th>
+            <th>Member Since</th>
+            <th>View</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Girik</td>
+            <td>45</td>
+            <td>11</td>
+            <td>5yrs</td>
+            <td><button class="blue-btn-org">View</button></td>
+          </tr>
+          <tr>
+              <td>Girik</td>
+              <td>45</td>
+              <td>35</td>
+              <td>5yrs</td>
+              <td><button class="blue-btn-org">View</button></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-
-<div class="container">
-    
-<h1>Admins</h1>
-{% for user in item.admins.all %}
-  <p>{{user.username}}</p>
-{% endfor %}
-
-</div>
-
-<div class="container">
-    <h1>members</h1>
-{% for user in item.members.all %}
-  <p>{{user.username}}</p><br>
-{% endfor %}
-
-</div>
-
-<div class="container">
-    <form method="POST">
-        {{ member_form.as_p }}
-        {% csrf_token %}
-        <input type="submit">
-    </form>
-    
-</div>
-
 {% endblock maincontent %}
+
+{% block rightbar %}
+               
+{% endblock rightbar %}

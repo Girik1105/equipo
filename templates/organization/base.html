@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% include "dashboard/snippets/head.html" %}
-    
-    <title>organization</title>
+
+    {% include "organization/snippets/head.html" %}
+
+    <title>{{ item.title }}</title>
+
 </head>
 <body>
+    <div class="main-area">
 
-    {% block maincontent %}
-      
-    {% endblock maincontent %}
+        {% include "organization/snippets/navbar.html" %}
+
+        <div class="side-panel">
+            {% block sidebar %}
+              
+            {% endblock sidebar %}
+         </div>
+        
+         <div class="work-area">
+             {% block maincontent %}
+               
+             {% endblock maincontent %}
+         </div>
+        
+         <div class="right-panel">
+             {% block rightbar %}
+               
+             {% endblock rightbar %}
+         </div>
+
+        {% include "dashboard/snippets/scripts.html" %}
+    </div>
 </body>
 </html>

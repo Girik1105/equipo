@@ -11,6 +11,7 @@ urlpatterns = [
     path('doodles/<str:pk>/', views.detail_doodle, name="doodles-detail"),
     path('doodles/edit/<str:pk>/', views.edit_doodle, name="doodles-edit"),
     path('doodles/delete/<str:pk>/', views.delete_doodle, name="doodles-delete"),
+    path('doodles/download/<str:pk>/', views.download_doodle, name='download-doodle'),
 
     path('organizations/', views.show_organizations, name='list-organizations'),
 

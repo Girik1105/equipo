@@ -57,9 +57,10 @@ def update_organization(request, slug):
         
     context = {
         "org_form": org_form,
+        "item":org,
     }
 
-    return render(request, 'organization/create_org.html', context)
+    return render(request, 'organization/edit_org.html', context)
 
 
 @login_required

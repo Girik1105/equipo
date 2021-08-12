@@ -3,11 +3,24 @@ a {
     color: white;
 }
 
+a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+
 .blue-btn-org {
     border: none;
     background-color: aqua;
     padding: 0.6em 1.4em;
     border-radius: 2em;
+    transition: 1s;
+}
+
+.blue-btn-org:hover {
+    background-color: aqua;
+    box-shadow: 0 0.5em 0.5em -0.4em aqua;
+    transform: scale(1.02);
 }
 
 .main-area{
@@ -151,12 +164,13 @@ a {
     .main-area{
         display: grid;
         grid-template-columns:0.6fr 1.2fr;
-        grid-template-rows: 0.2fr 1.4fr;
+        grid-template-rows: 0.2fr 1.4fr 1fr;
         grid-template-areas:"navbar      navbar"
-                            "sidebar    sub-content";  
+                            "sidebar    sub-content"
+                            "right-panel right-panel";  
                             grid-gap: 0.4rem;
                             border-radius: 1em;
-        width: 100%;            
+        width: 98%;            
         height: 99vh;
         background: linear-radient(to top right,rgba(255,255,255,.5),rgba(255,255,255,.5));
     }
@@ -166,6 +180,9 @@ a {
         font-weight: 900;
         height: 100%;
         width: 100%;
+    }
+    .right-panel{
+        width: 90%;
     }
 }
 
@@ -213,3 +230,45 @@ a {
     }
 }
 
+@media screen and (max-width: 1200px){
+    .member-holder .member .member-img{
+        width: 20%;
+    }
+    .member-holder .member .member-info{
+        width: 40%;
+    }
+}
+
+
+.form-btn {
+    margin: 1rem 0;
+}
+.extender {
+    width: 100%;
+}
+
+
+.group-desc {
+    grid-area: group;
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+}
+
+.group-desc .group-cover{
+    padding:0.3em;
+    width: 65%;
+    margin:0;
+}
+
+.group-desc .group-cover img{
+    width: 100%;
+    border-radius: 0.8em;
+}
+
+.group-desc .group-credentials {
+    width: 30%;
+    text-align: start;
+    padding: 0.5em;
+    font-size: 1em;
+}

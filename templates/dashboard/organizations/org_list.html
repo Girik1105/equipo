@@ -3,9 +3,10 @@
 {% block org_active %}active{% endblock org_active %}
 
 {% block maincontent %}
-<div class="title">
-    Your Organizations
-</div>
+<div class="content-holder">
+    <h1 class="content-holder-left title-text">Your Organizations</h1>
+    <button class="content-holder-right blue-btn"><a href="{% url 'org:create-org' %}">Create <i class="bi bi-building"></i></a></button>
+  </div>
 <div class="lg-card-holder">
     {% for org in organizations %}
     <div class="lg-card">

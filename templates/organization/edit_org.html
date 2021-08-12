@@ -1,0 +1,17 @@
+{% extends "organization/base.html" %}
+
+{% load bootstrap4 %}
+
+{% block maincontent %}
+    <div class="containe">
+        <div class="title-text">
+            Edit {{ item.name }}
+        </div>
+    </div>
+    <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}    
+        {% bootstrap_form org_form %}
+        <button class="blue-btn-org form-btn ">Confirm Changes <i class="bi bi-building"></i></button>
+       <a class="blue-btn-org form-btn red-btn" href="{% url 'org:detail-org' item.slug %}">Cancel <i class="bi bi-arrow-left"></i></a>
+    </form>
+{% endblock maincontent %}

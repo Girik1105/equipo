@@ -3,9 +3,7 @@
 {% load bootstrap4 %}
 
 {% block sidebar %}
-<div class="db-btn-holder">
-  <button class="blue-btn-org"><a href="{% url 'dashboard:index' %}">Go back to dsashboard</a></button> 
-</div>
+<div class="db-btn-holder"><button class="blue-btn-org"><a href="{% url 'dashboard:index' %}">Go back to dsashboard</a></button></div>
 <div class="member-holder">
   <div class="org-status">
       <h1>Owner</h1>
@@ -57,6 +55,17 @@
 
 
 {% block maincontent %}
+<div class="group-desc mb-3">
+    <div class="group-cover">
+        <img src="{{ item.cover.url }}" alt="">
+    </div>
+    <div class="group-credentials p-2">
+        <h4>{{ item.name }}</h4>
+        <p>{{ item.description }}</p>
+        <p><i class="bi bi-people-fill"></i> <span>{{ item.members.all.count }}</span></p>    
+    </div>
+</div>
+
 <div class="container shadow-sm">
   <table class="text-center table table-borderless table-hover">
       <thead>
@@ -119,5 +128,5 @@
 {% endblock maincontent %}
 
 {% block rightbar %}
-               
+<div class="db-btn-holder"><button class="blue-btn-org scope-btn"><a href="{% url 'org:update-org' item.slug %}">Edit Organization</a></button></div>
 {% endblock rightbar %}

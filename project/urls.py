@@ -31,6 +31,8 @@ urlpatterns = [
     path('user/profile/', include('accounts.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('organizations/', include('organization.urls')),
+
+    path('', views.index, name="index"),
 ]
 
 handler404 = 'project.views.error_404'

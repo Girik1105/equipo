@@ -178,10 +178,17 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT= os.path.join(BASE_DIR,'static')
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = "dashboard:index"
 # LOGOUT_REDIRECT_URL = "index"
+
+from whitenoise import WhiteNoise
+from project import MyWSGIApp
+
+application = MyWSGIApp()
+application = WhiteNoise(application, root='/static/')
+application.add_files('/static/', prefix='/static/')

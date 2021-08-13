@@ -181,10 +181,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = "dashboard:index"
 # LOGOUT_REDIRECT_URL = "index"
-
-from whitenoise import WhiteNoise
-from project import MyWSGIApp
-
-application = MyWSGIApp()
-application = WhiteNoise(application, root='/static/')
-application.add_files('/media/', prefix='/media/')

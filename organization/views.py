@@ -67,6 +67,7 @@ def update_organization(request, slug):
 def detail_organization(request, slug): 
 
     org = get_object_or_404(models.organization, slug=slug)
+    work = models.work.objects.filter(organization=org)
 
     if not models.Member.objects.filter(organization=org, user=request.user, is_verified=True).exists():
         raise Http404
@@ -94,6 +95,125 @@ def detail_organization(request, slug):
     context = {
         "item": org,
         "member_form":form,
+        "all_work":work,
     }
 
     return  render(request, 'organization/org_detail.html', context)
+
+@login_required
+def create_work(request, slug):
+    org = models.organization.objects.get(slug=slug)
+
+    if not request.user == org.owner or request.user in org.admins.all():
+        raise Http404
+
+    kwargs = {}
+    kwargs.update({"org": org})
+    form = forms.create_work_form(**kwargs)
+
+    if request.method == "POST":
+        if request.user == org.owner or request.user in org.admins.all():
+            form = forms.create_work_form(request.POST, **kwargs)
+            if form.is_valid():
+                form.save(commit=False)
+                form.instance.organization = org
+                form.instance.creator = request.user
+                form.save()
+                return redirect(reverse('org:detail-org', kwargs={"slug":org.slug}))
+            else:
+                return redirect(reverse('org:detail-org', kwargs={"slug":org.slug}))
+        else:
+            raise Http404
+    else:
+        form = forms.create_work_form(**kwargs)
+    
+    context = {
+        "form":form,
+        "item":org,
+    }
+
+    return render(request, 'organization/work/create_work.html', context)
+
+@login_required
+def edit_work(request, slug, pk):
+    org = models.organization.objects.get(slug=slug)
+
+    work = models.work.objects.get(organization=org, pk=pk)
+
+    if not request.user == org.owner or request.user in org.admins.all():
+        raise Http404
+
+    kwargs = {}
+    kwargs.update({"org": org})
+    form = forms.create_work_form(instance=work, **kwargs)
+
+    if request.method == "POST":
+        if request.user == org.owner or request.user in org.admins.all():
+            form = forms.create_work_form(request.POST, instance=work, **kwargs)
+            if form.is_valid():
+                form.save(commit=False)
+                form.instance.organization = org
+                form.instance.creator = request.user
+                form.save()
+                return redirect(reverse('org:detail-org', kwargs={"slug":org.slug}))
+            else:
+                return redirect(reverse('org:detail-org', kwargs={"slug":org.slug}))
+        else:
+            raise Http404
+    else:
+        form = forms.create_work_form(instance=work, **kwargs)
+    
+    context = {
+        "form":form,
+        "item":org,
+    }
+
+    return render(request, 'organization/work/edit_work.html', context)
+
+@login_required
+def update_work(request, pk, slug):
+    org = models.organization.objects.get(slug=slug)
+
+    try:
+        work = models.work.objects.get(assigned_to=request.user, pk=pk)
+    except:
+        raise Http404
+
+
+    form = forms.update_work_form(instance=work)
+
+    if request.method == "POST":
+            form = forms.update_work_form(request.POST, request.FILES, instance=work)
+            if form.is_valid():
+                form.save(commit=False)
+                form.instance.organization = org
+                form.instance.creator = request.user
+                form.save()
+                return redirect(reverse('org:detail-org', kwargs={"slug":org.slug}))
+            else:
+                return redirect(reverse('org:detail-org', kwargs={"slug":org.slug}))
+    else:
+        form = forms.update_work_form(instance=work)
+    
+    context = {
+        "form":form,
+        "item":org,
+    }
+
+    return render(request, 'organization/work/update_work.html', context)
+
+@login_required
+def detail_work(request, pk, slug):
+    org = models.organization.objects.get(slug=slug)
+
+    try:
+        work = models.work.objects.get(pk=pk)
+    except:
+        raise Http404
+    
+    context = {
+        "item":org,
+        "work": work,
+    }
+
+    return render(request, 'organization/work/detail_work.html', context)

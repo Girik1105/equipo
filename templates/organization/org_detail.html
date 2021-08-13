@@ -80,34 +80,35 @@
 </div>
 {% endif %}
 
-<div class="container shadow-sm">
-  <table class="text-center table table-borderless table-hover">
-      <thead>
-          <tr>
-            <th>Task</th>
-            <th>Created on</th>
-            <th>Due on</th>
-            <th>Status</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Complete work</td>
-            <td>today</td>
-            <td>Day after</td>
-            <td><button class="status-symbol status-green">Assigned</button></td>
-            <td><button class="blue-btn-org">View</button></td>
-          </tr>
-          <tr>
-              <td>Complete work</td>
-              <td>today</td>
-              <td>Day after</td>
-              <td><button class="status-symbol status-red">Not Assigned</button></td>
-              <td><button class="blue-btn-org">View</button></td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container mt-3 mb-3">
+  <h1 class="title-text">{{ item.title }} Work:</h1>
+  <div class="row">
+    <div class="display-flex col-sm-6">
+      {% for work in all_work  %}
+      <div class="card m-1">
+        <div class="card-body">
+          <h5 class="card-title">{{ work.title }}</h5>
+          <p class="card-text">{{ work.description }}</p>
+          {% if work.is_complete %}
+            Completed
+          {% else %}
+          Not completed
+          {% endif %}
+          {% if work.assigned_to %}
+          <p class="card-text"><b>Assigned to:</b> {{ work.assigned_to }}</p>
+          <p><b>Status:</b><button class="status-symbol status-green">Assigned</button></p>
+          {% else %}
+          <p><b>Status:</b><button class="status-symbol status-red">Not Assigned</button></p>
+          {% endif %}
+          {% if user == work.assigned_to %}
+            <a class="blue-btn-org" href="{% url 'org:update-work' pk=work.pk  slug=item.slug %}">Complete</a>
+          {% endif %}
+          <a href="{% url 'org:detail-work' pk=work.pk  slug=item.slug %}" class="blue-btn-org">Details</a>
+        </div>
+      </div>
+        {% endfor %}
+      </div>
+  </div>
 </div>
 
 <div class="container shadow-sm">
@@ -116,26 +117,18 @@
           <tr>
             <th>Member</th>
             <th>Tasks Assigned</th>
-            <th>Tasks Completed</th>
-            <th>Member Since</th>
+            <th>Last Seen</th>
             <th>View</th>
           </tr>
         </thead>
         <tbody>
+          {% for member in item.members.all  %}
           <tr>
-            <td>Girik</td>
-            <td>45</td>
-            <td>11</td>
-            <td>5yrs</td>
-            <td><button class="blue-btn-org">View</button></td>
+              <td>{{ member.username }}</td>
+              <td>{{ member.work.all.count }}</td>
+              <td>{{ member.last_login }}</td>
           </tr>
-          <tr>
-              <td>Girik</td>
-              <td>45</td>
-              <td>35</td>
-              <td>5yrs</td>
-              <td><button class="blue-btn-org">View</button></td>
-            </tr>
+          {% endfor %}
         </tbody>
     </table>
 </div>
@@ -144,5 +137,6 @@
 {% block rightbar %}
   {% if user == item.owner or user in item.admin.all %}
     <div class="db-btn-holder"><button class="blue-btn-org scope-btn"><a href="{% url 'org:update-org' item.slug %}">Edit Organization</a></button></div>
+    <div class="db-btn-holder"><button class="blue-btn-org org-btn-enlarge"><a href="{% url 'org:create-work' item.slug %}">Add Work</a></button></div>
   {% endif %}
 {% endblock rightbar %}

@@ -63,11 +63,11 @@ class work(models.Model):
     creator = models.ForeignKey(User, related_name='assigner', on_delete = models.CASCADE)
     title = models.CharField(max_length=150)
     description = models.TextField()
-    assigned_to = models.ForeignKey(Member, related_name="work", blank=True, null=True ,on_delete=models.SET_NULL)
-    files = models.FileField(blank=True, null=True)
+    assigned_to = models.ForeignKey(User, related_name="work", blank=True, null=True ,on_delete=models.SET_NULL)
+    files = models.FileField(upload_to='uploads/files', blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     due_date = models.DateField()
-    is_complete = models.BooleanField()
+    is_complete = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

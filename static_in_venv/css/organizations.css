@@ -3,6 +3,12 @@ a {
     color: white;
 }
 
+label {
+    font-weight: 500;
+    font-size: 1.15rem;
+    padding: 0.8rem 0;
+}
+
 a:hover {
     text-decoration: none;
     color: white;
@@ -21,6 +27,11 @@ a:hover {
     background-color: #25c1ff;
     box-shadow: 0 0.5em 0.5em -0.4em #25c1ff;
     transform: scale(1.02);
+}
+
+.org-btn-enlarge{
+    font-size: 1.4rem;
+    padding: 0.6rem 4rem;
 }
 
 .main-area{
@@ -94,6 +105,8 @@ a:hover {
 }
 
 .member-holder {
+    position: sticky;
+    top: 0;
     width: 100%;
     height: 90vh;
     overflow: scroll;
@@ -297,4 +310,9 @@ a:hover {
 
 .user-form-extend {
     width: 70%;
+}
+
+.increase-text {
+    font-size: 1.2rem;
+    padding: 0 0.5rem;
 }

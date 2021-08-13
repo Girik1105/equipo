@@ -1,0 +1,110 @@
+{% extends "organization/base.html" %}
+
+{% load bootstrap4 %}
+
+{% block sidebar %}
+<div class="db-btn-holder"><button class="blue-btn-org"><a href="{% url 'dashboard:index' %}">Go back to dsashboard</a></button></div>
+<div class="member-holder">
+  <div class="org-status">
+      <h1>Owner</h1>
+  </div>
+  <div class="member">
+      <div class="member-img"><img src="{{ item.owner.profile.profile_picture.url }}" alt=""></div>
+      <div class="member-info">
+        {{ item.owner.profile.name }} <br>
+        @{{ item.owner.username }}
+      </div>
+  </div>
+
+<div class="org-status">
+    <h1>Admins</h1>
+</div>
+{% for member in item.admins.all %}
+  <div class="member">
+      <div class="member-img"><img src="{{ member.profile.profile_picture.url }}" alt=""></div>
+      <div class="member-info">
+          {{ member.profile.name }} <br>
+          @{{ member.username }}
+      </div>
+  </div>
+{% empty %}
+<div class="container text-center">
+    <p>No admins yet!</p>
+</div>
+{% endfor %}
+
+<div class="org-status">
+    <h1>Members</h1>
+</div>
+{% for member in item.members.all %}
+  <div class="member">
+      <div class="member-img"><img src="{{ member.profile.profile_picture.url }}" alt=""></div>
+      <div class="member-info">
+          {{ member.profile.name }} <br>
+          @{{ member.username }}
+      </div>
+  </div>
+{% empty %}
+<div class="container text-center">
+    <p>No Members yet!</p>
+</div>
+{% endfor %}
+
+</div>
+{% endblock sidebar %}
+
+
+{% block maincontent %}
+<div class="container">
+    <div class="mt-2 mb-2">
+        {% if user == work.assigned_to %}<a class="blue-btn-org" href="{% url 'org:update-work' pk=work.pk  slug=item.slug %}">Complete</a>{% endif %}
+        {% if user == item.owner or user in item.admins.all %}<a class="scope-btn" href="{% url 'org:edit-work' pk=work.pk  slug=item.slug %}">Edit</a>{% endif %}
+    </div>
+
+    <h1 class="title-text">{{ work.title }}</h1>
+    <p class="increase-text">{{ work.description }}</p>
+    
+    <div class="mt-1 mb-1">
+    {% if work.assigned_to %}
+      <p class="card-text"><b>Assigned to:</b> {{ work.assigned_to }}</p>
+      <p><b>Status:</b><button class="status-symbol status-green">Assigned</button></p>
+    {% else %}
+      <p><b>Status:</b><button class="status-symbol status-red">Not Assigned</button></p>
+    {% endif %}
+    </div>
+
+    <div class="mt-1 mb-1">
+      {% if work.is_complete %}
+      <p><b>Completion Status:</b><button class="status-symbol status-green">Completed</button></p>
+    {% else %}
+        <p><b>Completion Status:</b><button class="status-symbol status-red">Not Completed</button></p>
+    {% endif %}
+    </div>
+    
+    <div class="title-text">Files:</div>
+
+    {% if work.files %}
+    <table class="table table-sm table-borderless">
+      <thead>
+        <th>File</th>
+        <th>Download</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ work.files }}</td>
+          <td><button class="blue-btn-org"><a href="{{ item.files.url }}" download>Download<i class="bi bi-file-earmark-arrow-down-fill"></i></a></button></td>
+        </tr>
+      </tbody>
+    </table>
+    {% else %}
+    <p>No files yet</p>
+    {% endif %}
+</div>
+<div class="container"><button class="blue-btn-org"><a href="{% url 'org:detail-org' item.slug %}">Back</a></button></div>
+{% endblock maincontent %}
+
+{% block rightbar %}
+  {% if user == item.owner or user in item.admin.all %}
+    <div class="db-btn-holder"><button class="blue-btn-org scope-btn"><a href="{% url 'org:update-org' item.slug %}">Edit Organization</a></button></div>
+  {% endif %}
+{% endblock rightbar %}

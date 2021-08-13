@@ -9,4 +9,8 @@ urlpatterns = [
     path('<slug>/', views.detail_organization, name='detail-org'),
     path('update/<slug>/', views.update_organization, name='update-org'),
 
+    path('work/create/<slug>/', views.create_work, name='create-work'),
+    path('work/complete/<int:pk>/<slug>/', views.update_work, name='update-work'),
+    path('work/edit/<int:pk>/<slug>/', views.edit_work, name='edit-work'),
+    path('work/detail/<int:pk>/<slug>/', views.detail_work, name='detail-work'),
 ]

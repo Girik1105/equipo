@@ -1,0 +1,73 @@
+{% extends "organization/base.html" %}
+
+{% load bootstrap4 %}
+
+{% block sidebar %}
+<div class="db-btn-holder"><button class="blue-btn-org"><a href="{% url 'dashboard:index' %}">Go back to dsashboard</a></button></div>
+<div class="member-holder">
+  <div class="org-status">
+      <h1>Owner</h1>
+  </div>
+  <div class="member">
+      <div class="member-img"><img src="{{ item.owner.profile.profile_picture.url }}" alt=""></div>
+      <div class="member-info">
+        {{ item.owner.profile.name }} <br>
+        @{{ item.owner.username }}
+      </div>
+  </div>
+
+<div class="org-status">
+    <h1>Admins</h1>
+</div>
+{% for member in item.admins.all %}
+  <div class="member">
+      <div class="member-img"><img src="{{ member.profile.profile_picture.url }}" alt=""></div>
+      <div class="member-info">
+          {{ member.profile.name }} <br>
+          @{{ member.username }}
+      </div>
+  </div>
+{% empty %}
+<div class="container text-center">
+    <p>No admins yet!</p>
+</div>
+{% endfor %}
+
+<div class="org-status">
+    <h1>Members</h1>
+</div>
+{% for member in item.members.all %}
+  <div class="member">
+      <div class="member-img"><img src="{{ member.profile.profile_picture.url }}" alt=""></div>
+      <div class="member-info">
+          {{ member.profile.name }} <br>
+          @{{ member.username }}
+      </div>
+  </div>
+{% empty %}
+<div class="container text-center">
+    <p>No Members yet!</p>
+</div>
+{% endfor %}
+
+</div>
+{% endblock sidebar %}
+
+
+{% block maincontent %}
+<h1 class="title-text">Edit work:</h1>
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% bootstrap_form form %}
+        {% csrf_token %}
+        <button class="blue-btn-org mt-4" type="submit">Add Work</button>
+        <a class="blue-btn-org form-btn red-btn" href="{% url 'org:detail-org' item.slug %}">Cancel <i class="bi bi-arrow-left"></i></a>
+    </form>
+</div>
+{% endblock maincontent %}
+
+{% block rightbar %}
+  {% if user == item.owner or user in item.admin.all %}
+    <div class="db-btn-holder"><button class="blue-btn-org scope-btn"><a href="{% url 'org:update-org' item.slug %}">Edit Organization</a></button></div>
+  {% endif %}
+{% endblock rightbar %}

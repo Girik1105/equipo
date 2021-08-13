@@ -1,6 +1,6 @@
 # **Equipo** - Collaborate, Cooperative, Communicate
 
-![alt text for screen readers](Logo.jpg "Logo")
+![alt text for screen readers](extras\Images\readme\Logo.jpg "Logo")
 
 ## Inspiration for Equipo
 

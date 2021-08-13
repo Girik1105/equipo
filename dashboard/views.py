@@ -8,6 +8,7 @@ from django.utils import timezone
 
 from . import models, forms
 from organization.models import Member, organization
+from organization.models import work as work_m
 
 import io
 from django.http import FileResponse
@@ -18,11 +19,15 @@ from reportlab.pdfgen import canvas
 def index(request):
     doodles = models.doodle.objects.filter(user=request.user)
     todos = models.to_do.objects.filter(user=request.user)
+    work = work_m.objects.filter(assigned_to=request.user)
     today = timezone.now().date()
     todo_today = models.to_do.objects.filter(user=request.user, is_complete=False, due_date=today)
+    work_today = work_m.objects.filter(assigned_to=request.user, due_date=today)
     context = {
         "todo":todos,
         "doodles":doodles,
+        "work":work,
+        "work_today":work_today,
         "todo_today":todo_today,
     }
     return render(request, 'dashboard/index.html', context)

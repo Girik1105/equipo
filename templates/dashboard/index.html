@@ -49,7 +49,7 @@
 
         <div class="card card-balancer">
             <span class="card-logo"><i class="bi bi-building"></i></span>
-            <span class="card-num">100</span>           
+            <span class="card-num">{{ work.count }}</span>           
         </div>
         
         <div class="card2 card-balancer">
@@ -63,6 +63,43 @@
         </div>
 
         <div class="main-home">
+
+            <h1 class="title-text">
+                Work Due Today:
+            </h1>
+            
+            {% if work_today %}
+            <table class="table table-borderless container-fluid border shadow-sm mt-2 table-balancer">
+                <thead>
+                  <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Due on</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Completed</th>
+                    <th scope="col">view</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    {% for item in work_today %}
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.created_on|date:"d M y" }}</td>
+                        <td>{{ item.due_date|date:"d M y" }}</td>
+                        <td>
+                          {% if item.is_complete %}
+                            <p><button class="status-symbol status-green">Yes</button></p>
+                          {% else %}
+                              <p><button class="status-symbol status-red">No</button></p>
+                          {% endif %}
+                        </td>
+                        <td><a class="blue-btn" href="{% url 'org:detail-work' slug=item.organization.slug pk=item.pk %}">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            {% else %}
+            <p>No work due for today. <b>#chill</b></p>
+            {% endif %}
 
             <h1 class="title-text">
                 Tasks Due Today:
@@ -96,6 +133,44 @@
             {% else %}
             <p>No Tasks are due for today <b>#winning</b></p>
             {% endif %}
+
+            <h1 class="title-text">
+                Work:
+            </h1>
+            
+            {% if work %}
+            <table class="table table-borderless container-fluid border shadow-sm mt-2 table-balancer">
+                <thead>
+                  <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Due on</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Completed</th>
+                    <th scope="col">view</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    {% for item in work %}
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.created_on|date:"d M y" }}</td>
+                        <td>{{ item.due_date|date:"d M y" }} ago</td>
+                        <td>
+                          {% if item.is_complete %}
+                            <p><button class="status-symbol status-green">Yes</button></p>
+                          {% else %}
+                              <p><button class="status-symbol status-red">No</button></p>
+                          {% endif %}
+                        </td>
+                        <td><a class="blue-btn" href="{% url 'org:detail-work' slug=item.organization.slug pk=item.pk %}">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            {% else %}
+            <p>No work assigned to you</p>
+            {% endif %}
+
 
         </div>
 

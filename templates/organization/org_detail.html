@@ -146,4 +146,25 @@
     <div class="db-btn-holder"><button class="blue-btn-org scope-btn"><a href="{% url 'org:update-org' item.slug %}">Edit Organization</a></button></div>
     <div class="db-btn-holder"><button class="blue-btn-org org-btn-enlarge"><a href="{% url 'org:create-work' item.slug %}">Add Work</a></button></div>
   {% endif %}
+  <div class="org-stats">
+
+      <h1 class="text-title">Stats</h1>
+
+    <div class="stat">
+      Admin <i class="bi bi-person-plus"></i>
+      <span>{{ item.admins.all.count }}</span>
+     </div>
+    <div class="stat">
+      Members <i class="bi bi-people"></i>
+      <span>{{ item.members.all.count }}</span>
+    </div>
+    <div class="stat">
+      Tasks <i class="bi bi-file-earmark"></i>
+      <span>{{ item.organization.all.count }}</span>
+   </div>
+
+   <div class="stat">
+        
+   </div>
+</div>
 {% endblock rightbar %}

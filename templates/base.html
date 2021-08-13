@@ -15,16 +15,23 @@
             padding: 0.4rem 0;
             font-weight: 500;
         }
+      
     </style>
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
 </head>
 <body>
-    <div class="col-4">
+
+    <div class="row container-fluid">
+        <div class="col-12">
+            {% include "landing/home/snippets/nav.html" %}
+        </div>
+        <div class="col-12">
+            {% block maincontent %}
+          
+            {% endblock maincontent %}
+        </div>
+        
     </div>
 
-    <div class="col-8 d-flex p-2 justify-content-center">
-        {% block maincontent %}
-      
-        {% endblock maincontent %}
-    </div>
 </body>
 </html>

@@ -40,7 +40,7 @@ body::-webkit-scrollbar-track {
 .scope-btn{
     border: none;
     border-radius: 1em;
-    background-color: #9dff70;
+    background-color: #8F00FF ;
     font-size: 1.4rem;
     padding: 0.6rem 2rem;
     margin: 0.2rem;
@@ -48,17 +48,17 @@ body::-webkit-scrollbar-track {
 }
 
 .scope-btn:hover {
-    background-color: #9dff70;
-    box-shadow: 0 0.5em 0.5em -0.4em #9dff70;
+    background-color: #8F00FF ;
+    box-shadow: 0 0.5em 0.5em -0.4em #8F00FF ;
     /* transform: scale(1.15); */
 }
 
 .red-btn {
-    background-color: #fc5c5c;
+    background-color: #e0b0ff;
 }
 
 .red-btn:hover {
-    background-color: #fc5c5c;
+    background-color: #e0b0ff;
     box-shadow: 0 0.5em 0.5em -0.4em rgb(255, 47, 47);
 }
 
@@ -99,4 +99,50 @@ body::-webkit-scrollbar-track {
     align-self: flex-end;
     margin-left: auto;
     margin-right: 1rem;
+}
+
+
+.blue-btn-org {
+    border: none;
+    background-color: #25c1ff;
+    padding: 0.6em 1.4em;
+    border-radius: 2em;
+    transition: 1s;
+}
+
+.blue-btn-org:hover {
+    background-color: #25c1ff;
+    box-shadow: 0 0.5em 0.5em -0.4em #25c1ff;
+    transform: scale(1.02);
+}
+
+.org-btn-enlarge{
+    font-size: 1.4rem;
+    padding: 0.6rem 4rem;
+}
+
+
+.status-symbol{
+    width: auto;
+    padding: 0.5rem 1rem;
+    margin: 0 0.2rem;
+    border: none;
+    border-radius: 2em;
+}
+
+.status-green{
+    background-color: #8F00FF;
+    color: rgb(248, 248, 248);
+}
+
+.status-yellow{
+    background-color: rgb(251, 233, 152);
+    box-shadow: 0 0.5em 0.5em -0.4em rgb(251, 233, 152);
+    color: rgb(248, 248, 248);
+}
+
+.status-red {
+    background-color: #e0b0ff;
+    box-shadow: 0 0.5em 0.5em -0.4em #e0b0ff;
+    color: rgb(248, 248, 248);  
 }

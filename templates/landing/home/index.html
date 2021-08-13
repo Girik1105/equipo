@@ -2,113 +2,65 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://kit.fontawesome.com/64d58efce2.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="{% static 'css/landing.css' %}" />
+    {% include "landing/home/snippets/head.html" %}
     <title>Home</title>
   </head>
 
   <body>
-    <!--  Navbar-->
-
-    <nav>
-      <div class="menu-icon">
-        <span class="fas fa-bars"></span>
-      </div>
-      <div class="logo">Nexus</div>
-      <div class="nav-items">
-        <li><a href="{% url 'index' %}">Home</a></li>
-        <li><a href="#">Features</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact Us</a></li>
-      </div>
-    </nav>
+    {% include "landing/home/snippets/nav.html" %}
 
     <div class="container">
-    {% block maincontent %}
-    <div class="forms-container">
-      <div class="signin-signup">
-        <form action="" class="sign1">
-          <h2 class="title">Sign In</h2>
-          <div class="input">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Email/Username" />
-          </div>
-          <div class="input">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" />
-          </div>
-          <input type="submit" value="Login" class="Login-Button" />
+      <div class="forms-container">
+        <div class="signin-signup">
+          <form action="" class="sign1">
+            <h2 class="title">Equipo</h2>
+            <p>
+              Equipo is platform for user. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus accusantium perferendis 
+              qui temporibus sapiente. Consequatur adipisci velit incidunt in, error necessitatibus, asperiores quos dolorem corporis laudantium minima rem, totam facilis.
+            </p>
+            <button class="Login-Button" id="sign-in-btn">
+              <a href="{% url 'account_signup' %}">Start Today</a>
+            </button>
 
-          <p class="Google-login">Sign in with google</p>
-          <div class="Google-login-2">
-            <a href="#" class="Google-icon">
-              <i class="fab fa-google"></i>
-            </a>
-          </div>
-        </form>
+          </form>
 
-        <form action="" class="sign2">
-          <h2 class="title">Sign Up</h2>
-          <div class="input">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Username" />
-          </div>
-          <div class="input">
-            <i class="fas fa-envelope"></i>
-            <input type="text" placeholder="Email" />
-          </div>
-          <div class="input">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="password" />
-          </div>
-          <input type="submit" value=" Sign Up" class="Login-Button" />
-
-          <p class="Google-login">Sign up with google</p>
-          <div class="Google-login-2">
-            <a href="#" class="Google-icon">
-              <i class="fab fa-google"></i>
-            </a>
-          </div>
-        </form>
+          <form action="" class="sign2">
+           <!-- FEATURES -->
+            <div class="items">
+              Collaborate
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
 
     <div class="panel-container">
       <div class="panel left-panel">
         <div class="content">
-          <h3>Sign Up</h3>
+          <h3>Equipo</h3>
           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            collaborate, cooperate, communicate
           </p>
           <button class="Login-Button transparent" id="sign-up-btn">
-            Sign Up
+            Features
           </button>
         </div>
-        <img src="'{% static 'images/signup2.svg' %}" class="image" alt="">
+        <img src="{% static 'images/signup2.svg' %}" class="image" alt="">
       </div>
 
       <div class="panel right-panel">
         <div class="content">
-          <h3>Login to access Yr Data</h3>
+          <h3>Equipo</h3>
           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
-            <button class="Login-Button transparent" id="sign-in-btn">
-              Sign In
-            </button>
+            collaborate, cooperate, communicate
           </p>
+          <button class="Login-Button transparent" id="sign-in-btn">
+            <a href="{% url 'account_signup' %}">Start Today</a>
+          </button>
         </div>
 
         <img src="{% static 'images/Loginup2.svg' %}" class="image" alt="">
       </div>
     </div>
-    {% endblock maincontent %}
     </div>
 
     <script src="{% static 'js/landing.js' %}"></script>

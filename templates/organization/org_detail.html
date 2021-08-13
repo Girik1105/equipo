@@ -3,7 +3,7 @@
 {% load bootstrap4 %}
 
 {% block sidebar %}
-<div class="db-btn-holder"><button class="blue-btn-org"><a href="{% url 'dashboard:index' %}">Go back to dsashboard</a></button></div>
+<div class="db-btn-holder"><button class="blue-btn-org"><a href="{% url 'dashboard:index' %}">Go back to dashboard</a></button></div>
 <div class="member-holder">
   <div class="org-status">
       <h1>Owner</h1>
@@ -81,33 +81,41 @@
 {% endif %}
 
 <div class="container mt-3 mb-3">
-  <h1 class="title-text">{{ item.title }} Work:</h1>
-  <div class="row">
-    <div class="display-flex col-sm-6">
-      {% for work in all_work  %}
-      <div class="card m-1">
-        <div class="card-body">
-          <h5 class="card-title">{{ work.title }}</h5>
-          <p class="card-text">{{ work.description }}</p>
-          {% if work.is_complete %}
-            Completed
+  <h1 class="title-text">{{ item.title }} Work: </h1>
+  <div class="work-details">
+    {% for work in all_work  %}
+    <div class="work-component">
+          <h4>{{ work.title }}</h4>
+          <p>{{ work.description }}</p>
+          
+          <div class="mt-1 mb-1">
+            {% if work.is_complete %}
+            <p><b>Completion Status:</b><button class="status-symbol status-green">Completed</button></p>
           {% else %}
-          Not completed
+              <p><b>Completion Status:</b><button class="status-symbol status-red">Not Completed</button></p>
           {% endif %}
-          {% if work.assigned_to %}
-          <p class="card-text"><b>Assigned to:</b> {{ work.assigned_to }}</p>
-          <p><b>Status:</b><button class="status-symbol status-green">Assigned</button></p>
-          {% else %}
-          <p><b>Status:</b><button class="status-symbol status-red">Not Assigned</button></p>
+          </div>
+
+          <div class="div">
+            {% if work.assigned_to %}
+            <p><b>Assigned to:</b> {{ work.assigned_to }}</p>
+            <p><b>Status:</b><button class="status-symbol status-green">Assigned</button></p>
+            {% else %}
+            <p><b>Status:</b><button class="status-symbol status-red">Not Assigned</button></p>
+            {% endif %}
+          </div>
+          
+          <div class="mt-4">
+            {% if user == work.assigned_to %}
+            <a class="blue-btn-org" href="{% url 'org:update-work' pk=work.pk  slug=item.slug %}">Send Work <i class="bi bi-arrow-right-short"></i></a>
           {% endif %}
-          {% if user == work.assigned_to %}
-            <a class="blue-btn-org" href="{% url 'org:update-work' pk=work.pk  slug=item.slug %}">Complete</a>
+          {% if user == item.owner or user in item.admins.all %}
+            <a class="blue-btn-org" href="{% url 'org:edit-work' pk=work.pk  slug=item.slug %}">Edit work<i class="bi bi-pencil"></i></a>
           {% endif %}
-          <a href="{% url 'org:detail-work' pk=work.pk  slug=item.slug %}" class="blue-btn-org">Details</a>
-        </div>
+          <a href="{% url 'org:detail-work' pk=work.pk  slug=item.slug %}" class="blue-btn-org">Details <i class="bi bi-file-earmark-text"></i></a>
+          </div>
       </div>
-        {% endfor %}
-      </div>
+    {% endfor %}
   </div>
 </div>
 
@@ -118,7 +126,6 @@
             <th>Member</th>
             <th>Tasks Assigned</th>
             <th>Last Seen</th>
-            <th>View</th>
           </tr>
         </thead>
         <tbody>

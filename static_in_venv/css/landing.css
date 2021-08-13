@@ -9,6 +9,17 @@
     box-sizing: border-box;
 }
 
+a{
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+
 .title{
     font-weight: 9000;
     font-family: "Poppins", sans-serif;

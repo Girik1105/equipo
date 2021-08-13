@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,16 +18,13 @@
     </style>
 </head>
 <body>
-    <div class="col-2">
-
+    <div class="col-4">
     </div>
-    <div class="col-8">
+
+    <div class="col-8 d-flex p-2 justify-content-center">
         {% block maincontent %}
       
         {% endblock maincontent %}
-    </div>
-    <div class="col-2">
-
     </div>
 </body>
 </html>

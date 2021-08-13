@@ -600,7 +600,13 @@ nav {
 #1779ff
 
 #5FB2F5
- ––> 
+ ––> */
 
 
- 
+ .purple-color {
+     color:#8F00FF ;
+ }
+
+ a{
+     text-decoration: none;
+ }

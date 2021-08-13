@@ -92,4 +92,6 @@ We used the famous python module **Django** to build the backend of the website 
 - python
 - Bootstrap
 
+# [Look at Our Website For more Info](https://bit.ly/3xL8OxI)
+
 # [Try out our Website]()

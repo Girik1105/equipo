@@ -61,14 +61,13 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -167,7 +166,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_in_venv')
 ]
 
-STATIC_ROOT= os.path.join(BASE_DIR,'static')
+STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -176,10 +175,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = "dashboard:index"
 # LOGOUT_REDIRECT_URL = "index"
-
-from whitenoise import WhiteNoise
-from django.core.wsgi import get_wsgi_application
-
-application = get_wsgi_application()
-application = WhiteNoise(application, root='/static/')
-application.add_files('/static/', prefix='/static/')

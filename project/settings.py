@@ -172,7 +172,7 @@ DATE_INPUT_FORMATS = ('%d/%m/%Y','%Y/%m/%d', '%d-%m-%Y','%Y-%m-%d')
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_venv')]
-STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles')
+STATIC_ROOT= os.path.join(BASE_DIR,'static')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -181,3 +181,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = "dashboard:index"
 # LOGOUT_REDIRECT_URL = "index"
+
+from whitenoise import WhiteNoise
+from project import MyWSGIApp
+
+application = MyWSGIApp()
+application = WhiteNoise(application, root='/static/')
+application.add_files('/media/', prefix='/media/')

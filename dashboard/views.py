@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 
 from django.http import Http404
+
+from django.utils import timezone
 
 from . import models, forms
 from organization.models import Member, organization
@@ -17,9 +18,12 @@ from reportlab.pdfgen import canvas
 def index(request):
     doodles = models.doodle.objects.filter(user=request.user)
     todos = models.to_do.objects.filter(user=request.user)
+    today = timezone.now().date()
+    todo_today = models.to_do.objects.filter(user=request.user, is_complete=False, due_date=today)
     context = {
         "todo":todos,
         "doodles":doodles,
+        "todo_today":todo_today,
     }
     return render(request, 'dashboard/index.html', context)
 

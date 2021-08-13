@@ -66,6 +66,20 @@
     </div>
 </div>
 
+{% if user == item.owner or user in item.admin.all %}
+<div class="container-fluid mb-3">
+  <h1 class="title-text">Add a Member</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="content-holder">
+      <div class="content-holder-left user-form-extend">{% bootstrap_form member_form %}</div>
+      <button class="content-holder-right btn"><input class="blue-btn-org" type="submit" value="Add member"></button>
+    </div>
+    
+  </form>
+</div>
+{% endif %}
+
 <div class="container shadow-sm">
   <table class="text-center table table-borderless table-hover">
       <thead>
@@ -128,5 +142,7 @@
 {% endblock maincontent %}
 
 {% block rightbar %}
-<div class="db-btn-holder"><button class="blue-btn-org scope-btn"><a href="{% url 'org:update-org' item.slug %}">Edit Organization</a></button></div>
+  {% if user == item.owner or user in item.admin.all %}
+    <div class="db-btn-holder"><button class="blue-btn-org scope-btn"><a href="{% url 'org:update-org' item.slug %}">Edit Organization</a></button></div>
+  {% endif %}
 {% endblock rightbar %}

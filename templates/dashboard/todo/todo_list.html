@@ -22,25 +22,20 @@
     </thead>
     <tbody class="text-center">
         {% for item in all_todo  %}
-          {% if not item.is_complete %}
             <tr>
               <td>{{ item.title }}</td>
               <td>{{ item.description }}</td>
               <td>{{ item.created_on|timesince }} ago</td>
               <td>{{ item.due_date|date:"d M Y" }}</td>
-              <td><a class="blue-btn" href="{% url 'dashboard:todo-complete' item.pk %}">Finish</a></td>
+              <td>
+                {% if item.is_complete %}
+                  <button class="scope-btn">Completed</button>
+                {% else %}  
+                  <a class="blue-btn" href="{% url 'dashboard:todo-complete' item.pk %}">Finish</a>
+                {% endif %}
+              </td>
               <td><a class="red-btn blue-btn" href="{% url 'dashboard:todo-delete' item.pk %}"><i class="bi bi-x-lg"></i></a></td>
             </tr>
-          {% else %}
-          <tr>
-              <td>{{ item.title }}</td>
-              <td>{{ item.description }}</td>
-              <td>{{ item.created_on|timesince }} ago</td>
-              <td>{{ item.due_date|date:"d M Y" }}</td>
-              <td><a class="scope-btn">Completed</a></td>
-              <td><a class="red-btn blue-btn" href="{% url 'dashboard:todo-delete' item.pk %}"><i class="bi bi-x-lg"></i></a></td>
-          </tr>
-        {% endif %}
     {% empty %}
          <td>No Doodles!</td>
          <td>Add one now!</td>

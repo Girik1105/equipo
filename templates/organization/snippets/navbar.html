@@ -1,8 +1,11 @@
 <div class="navbar">
     <div class="nav-comp">
-        <div class="nav-comp-img"><img src="https://tse1.mm.bing.net/th?id=OIP.Jgo30CBgfADnmrv0Tx7aJAHaHa&pid=Api&P=0&w=300&h=300" alt=""></div>
+        <div class="nav-comp-img"><img src="{{ item.cover.url }}" alt=""></div>
         <div class="nav-comp-info">
-            Company Company
+            {{ item.name }}
         </div>
+    </div>
+    <div class="nav-right">
+        <a href="{% url 'account_logout' %}">Logout <i class="bi bi-box-arrow-right"></i></a>
     </div>
 </div>

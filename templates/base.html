@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block head_title %}{% endblock %}</title>
+    {% include "dashboard/snippets/head.html" %}
+    <style>
+        a{
+            color: #25c1ff;
+        }
+        body{
+            font-size: 1.15rem;
+        }
+        label{
+            padding: 0.4rem 0;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="col-2">
+
+    </div>
+    <div class="col-8">
+        {% block maincontent %}
+      
+        {% endblock maincontent %}
+    </div>
+    <div class="col-2">
+
+    </div>
+</body>
+</html>

@@ -63,36 +63,40 @@
         </div>
 
         <div class="main-home">
-    
-            <table class="table table-borderless container-fluid border shadow-sm mt-2">
+
+            <h1 class="title-text">
+                Tasks Due Today:
+            </h1>
+            
+            {% if todo_today %}
+            <table class="table table-borderless container-fluid border shadow-sm mt-2 table-balancer">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Added On</th>
+                    <th scope="col">Due on</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Delete</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+                    <tr>
+                    {% for item in todo_today %}
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.description }}</td>
+                        <td>{{ item.created_on|timesince }} ago</td>
+                        <td>{{ item.due_date|date:"d M Y" }}</td>
+                        <td><a class="blue-btn" href="{% url 'dashboard:todo-complete' item.pk %}">Finish</a></td>
+                        <td><a class="red-btn blue-btn" href="{% url 'dashboard:todo-delete' item.pk %}"><i class="bi bi-x-lg"></i></a></td>
+                    {% endfor %}
+                    </tr>
                 </tbody>
               </table>
+            {% else %}
+            <p>No Tasks are due for today <b>#winning</b></p>
+            {% endif %}
+
         </div>
 
         {% include "dashboard/snippets/footer.html" %}

@@ -21,7 +21,7 @@
       </div>
       <div class="logo">Nexus</div>
       <div class="nav-items">
-        <li><a href="#">Home</a></li>
+        <li><a href="{% url 'index' %}">Home</a></li>
         <li><a href="#">Features</a></li>
         <li><a href="#">About Us</a></li>
         <li><a href="#">Contact Us</a></li>
@@ -29,84 +29,86 @@
     </nav>
 
     <div class="container">
-      <div class="forms-container">
-        <div class="signin-signup">
-          <form action="" class="sign1">
-            <h2 class="title">Sign In</h2>
-            <div class="input">
-              <i class="fas fa-user"></i>
-              <input type="text" placeholder="Email/Username" />
-            </div>
-            <div class="input">
-              <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
-            </div>
-            <input type="submit" value="Login" class="Login-Button" />
+    {% block maincontent %}
+    <div class="forms-container">
+      <div class="signin-signup">
+        <form action="" class="sign1">
+          <h2 class="title">Sign In</h2>
+          <div class="input">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Email/Username" />
+          </div>
+          <div class="input">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" />
+          </div>
+          <input type="submit" value="Login" class="Login-Button" />
 
-            <p class="Google-login">Sign in with google</p>
-            <div class="Google-login-2">
-              <a href="#" class="Google-icon">
-                <i class="fab fa-google"></i>
-              </a>
-            </div>
-          </form>
+          <p class="Google-login">Sign in with google</p>
+          <div class="Google-login-2">
+            <a href="#" class="Google-icon">
+              <i class="fab fa-google"></i>
+            </a>
+          </div>
+        </form>
 
-          <form action="" class="sign2">
-            <h2 class="title">Sign Up</h2>
-            <div class="input">
-              <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
-            </div>
-            <div class="input">
-              <i class="fas fa-envelope"></i>
-              <input type="text" placeholder="Email" />
-            </div>
-            <div class="input">
-              <i class="fas fa-lock"></i>
-              <input type="password" placeholder="password" />
-            </div>
-            <input type="submit" value=" Sign Up" class="Login-Button" />
+        <form action="" class="sign2">
+          <h2 class="title">Sign Up</h2>
+          <div class="input">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Username" />
+          </div>
+          <div class="input">
+            <i class="fas fa-envelope"></i>
+            <input type="text" placeholder="Email" />
+          </div>
+          <div class="input">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="password" />
+          </div>
+          <input type="submit" value=" Sign Up" class="Login-Button" />
 
-            <p class="Google-login">Sign up with google</p>
-            <div class="Google-login-2">
-              <a href="#" class="Google-icon">
-                <i class="fab fa-google"></i>
-              </a>
-            </div>
-          </form>
+          <p class="Google-login">Sign up with google</p>
+          <div class="Google-login-2">
+            <a href="#" class="Google-icon">
+              <i class="fab fa-google"></i>
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="panel-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>Sign Up</h3>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry.
+          </p>
+          <button class="Login-Button transparent" id="sign-up-btn">
+            Sign Up
+          </button>
         </div>
+        <img src="'{% static 'images/signup2.svg' %}" class="image" alt="">
       </div>
 
-      <div class="panel-container">
-        <div class="panel left-panel">
-          <div class="content">
-            <h3>Sign Up</h3>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry.
-            </p>
-            <button class="Login-Button transparent" id="sign-up-btn">
-              Sign Up
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>Login to access Yr Data</h3>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry.
+            <button class="Login-Button transparent" id="sign-in-btn">
+              Sign In
             </button>
-          </div>
-          <img src="'{% static 'images/signup2.svg' %}" class="image" alt="" />
+          </p>
         </div>
 
-        <div class="panel right-panel">
-          <div class="content">
-            <h3>Login to access Yr Data</h3>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry.
-              <button class="Login-Button transparent" id="sign-in-btn">
-                Sign In
-              </button>
-            </p>
-          </div>
-
-          <img src="{% static 'images/Loginup2.svg' %}" class="image" alt="" />
-        </div>
+        <img src="{% static 'images/Loginup2.svg' %}" class="image" alt="">
       </div>
+    </div>
+    {% endblock maincontent %}
     </div>
 
     <script src="{% static 'js/landing.js' %}"></script>

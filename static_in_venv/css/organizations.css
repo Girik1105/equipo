@@ -11,15 +11,15 @@ a:hover {
 
 .blue-btn-org {
     border: none;
-    background-color: aqua;
+    background-color: #25c1ff;
     padding: 0.6em 1.4em;
     border-radius: 2em;
     transition: 1s;
 }
 
 .blue-btn-org:hover {
-    background-color: aqua;
-    box-shadow: 0 0.5em 0.5em -0.4em aqua;
+    background-color: #25c1ff;
+    box-shadow: 0 0.5em 0.5em -0.4em #25c1ff;
     transform: scale(1.02);
 }
 
@@ -68,6 +68,20 @@ a:hover {
     width: 80%;
 }
 
+.navbar  .nav-right {
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.7em;
+    width: 30%;
+    height: 100%;
+    font-size: 1.2rem;
+}
+
+.navbar .nav-right a{
+    color: black;
+}
+
 .side-panel {
     grid-area: sidebar;
 }
@@ -81,9 +95,17 @@ a:hover {
 
 .member-holder {
     width: 100%;
+    height: 90vh;
+    overflow: scroll;
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.member-holder::-webkit-scrollbar {
+    display: none;
 }
 
 .member-holder .member {
@@ -92,7 +114,7 @@ a:hover {
     justify-content: flex-start;
     width: 95%;
     padding: 0.2rem;
-    margin: 0.6rem 0.5rem;
+    margin: 0.2rem 0.5rem;
 }
 
 .member-holder .member .member-img{
@@ -271,4 +293,8 @@ a:hover {
     text-align: start;
     padding: 0.5em;
     font-size: 1em;
+}
+
+.user-form-extend {
+    width: 70%;
 }

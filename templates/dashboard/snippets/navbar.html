@@ -8,6 +8,18 @@
             <span class="smaller-text">@{{ user.username }}</span>
         </div>    
 
+        <div class="nav-setting">
+            <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-gear"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Change Password</a>
+                  <a class="dropdown-item" href="#">Change Email</a>
+                </div>
+              </div>
+        </div>
+
         {% if messages %}
         <div class="container pt-3">
             {% for message in messages %}

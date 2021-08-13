@@ -64,7 +64,7 @@ class work(models.Model):
     title = models.CharField(max_length=150)
     description = models.TextField()
     assigned_to = models.ForeignKey(Member, related_name="work", blank=True, null=True ,on_delete=models.SET_NULL)
-    files= models.FileField(blank=True, null=True)
+    files = models.FileField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     due_date = models.DateField()
     is_complete = models.BooleanField()

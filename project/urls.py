@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from . import views
 from accounts.views import account_signup_view
 
-from dkamgo.views.static import serve
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,7 +36,7 @@ urlpatterns = [
 
     path('', views.index, name="index"),
 
-    re_path(r'^media/(?P<path>\w+)$', serve, {'document_root':settings.MEDIA_ROOT}),
+    # re_path(r'^media/(?P<path>.*)$', serve, {'document_root':settings.MEDIA_ROOT}),
 ]
 
 handler404 = 'project.views.error_404'

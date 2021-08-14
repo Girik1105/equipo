@@ -96,4 +96,6 @@ We used the famous python module **Django** to build the backend of the website 
 
 # [Try out our Website](https://equipo-project.herokuapp.com/)
 
+#[presentation](https://docs.google.com/presentation/d/12SqYRDkcCXOGpNnxQFeJyFoydmbgozEbv8DOTtEdGQE/edit?usp=sharing)
+
 # [Demo Video](https://youtu.be/-0RiDkp5-F8)

@@ -7,7 +7,7 @@
     <div class="nav-items">
       <li><a href="{% url 'index' %}">Home</a></li>
       {% if user.is_authenticated %}
-      <li><a href="{% url 'dashboard:index' %}">Home</a></li>
+      <li><a href="{% url 'dashboard:index' %}">Go back to dashboard</a></li>
       {% else %}
       <li><a href="{% url 'account_login' %}">Login</a></li>
       <li><a href="{% url 'account_signup' %}">sign up</a></li>

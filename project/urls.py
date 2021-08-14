@@ -36,7 +36,7 @@ urlpatterns = [
 
     path('', views.index, name="index"),
 
-    re_path(r'^media/(?P<path>.*)$', serve, {'document_root':settings.MEDIA_ROOT}),
+    re_path(r'^media/(?P<path>\w+)$', serve, {'document_root':settings.MEDIA_ROOT}),
 ]
 
 handler404 = 'project.views.error_404'

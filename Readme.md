@@ -84,18 +84,33 @@ We used the famous python module **Django** to build the backend of the website 
 
 ## Built With
 
-- CSS
+Frontend:
+- html
+- css
+- javascript
+- bootstrap
+
+Backend:
+- python
 - django
 - django-allauth
-- HTML5
-- javascript
-- python
-- Bootstrap
+
+## How to run this project:
+
+
+Download requirements:
+```
+pip install -r requirements.txt
+```
+Then run the python file:
+```
+python manage.py runserver 
+```
 
 # [Click Here for more Info](https://bit.ly/3xL8OxI)
 
 # [Try out our Website](https://equipo-project.herokuapp.com/)
 
-#[presentation](https://docs.google.com/presentation/d/12SqYRDkcCXOGpNnxQFeJyFoydmbgozEbv8DOTtEdGQE/edit?usp=sharing)
+# [presentation](https://docs.google.com/presentation/d/12SqYRDkcCXOGpNnxQFeJyFoydmbgozEbv8DOTtEdGQE/edit?usp=sharing)
 
 # [Demo Video](https://youtu.be/-0RiDkp5-F8)

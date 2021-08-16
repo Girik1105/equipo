@@ -68,6 +68,8 @@ def detail_organization(request, slug):
 
     org = get_object_or_404(models.organization, slug=slug)
     work = models.work.objects.filter(organization=org)
+    members = models.Member.objects.filter(organization=org)
+    unverified_members = models.Member.objects.filter(organization=org, is_verified=False)
 
     if not models.Member.objects.filter(organization=org, user=request.user, is_verified=True).exists():
         raise Http404
@@ -81,7 +83,7 @@ def detail_organization(request, slug):
                 if form.instance.user not in org.members.all():
                     form.save(commit=False)
                     form.instance.organization = org
-                    form.instance.is_verified = True
+                    form.instance.is_verified = False
                     form.save(commit=True)
                     return redirect(reverse('org:detail-org', kwargs={"slug":org.slug}))
             else:
@@ -96,6 +98,8 @@ def detail_organization(request, slug):
         "item": org,
         "member_form":form,
         "all_work":work,
+        "members":members,
+        "unverified_members":unverified_members,
     }
 
     return  render(request, 'organization/org_detail.html', context)
@@ -217,3 +221,25 @@ def detail_work(request, pk, slug):
     }
 
     return render(request, 'organization/work/detail_work.html', context)
+
+@login_required
+def leave_organization(request, slug):
+    org = models.organization.objects.get(slug=slug)
+    member = models.Member.objects.get(user=request.user, organization=org)
+    
+    if org.owner == request.user:
+        oldest_member = models.Member.objects.filter(organization=org).order_by('joined_since')[1:2].first()
+        org.owner = oldest_member.user
+        org.save()
+    
+    member.delete()
+
+    return redirect('dashboard:list-organizations')
+
+def verify_membership(request, slug):
+    org = models.organization.objects.get(slug=slug)
+    member = models.Member.objects.get(user=request.user, organization=org)
+    member.is_verified = True
+    member.save()
+
+    return redirect(reverse('org:detail-org', kwargs={"slug":org.slug}))

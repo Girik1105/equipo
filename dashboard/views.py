@@ -191,10 +191,12 @@ def delete_todo(request, pk):
 @login_required
 def show_organizations(request):
     
-    orgs = organization.objects.filter(members=request.user)
+    orgs = organization.objects.filter(members=request.user, membership__is_verified=True)
+    memberships = Member.objects.filter(user=request.user, is_verified=False)
 
     context = {
-        'organizations':orgs
+        'organizations':orgs,
+        'memberships':memberships,
     }
 
     return render(request, 'dashboard/organizations/org_list.html', context)

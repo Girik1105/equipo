@@ -3,6 +3,32 @@
 {% block org_active %}active{% endblock org_active %}
 
 {% block maincontent %}
+<div class="container">
+    <h1 class="title-text">Organizations you are added to:</h1>
+    <table class="table-balancer table table-borderless">
+        <thead>
+          <tr class="text-center">
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Verify</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+        {% for member in memberships  %}
+            <tr>
+                <td>{{ member.organization.name }}</td>
+                <td>{{ member.organization.description }}</td>
+                <td><a class="blue-btn" href="{% url 'org:verify-member' slug=member.organization.slug %}">Verify</a></td>
+            </tr>
+        {% empty %}
+             <td>Not added!</td>
+             <td></td>
+             <td><i class="bi bi-arrow-up-circle-fill"></i></td>
+        {% endfor %}
+        </tbody>
+      </table>
+</div>
+
 <div class="content-holder">
     <h1 class="content-holder-left title-text">Your Organizations</h1>
     <button class="content-holder-right blue-btn"><a href="{% url 'org:create-org' %}">Create <i class="bi bi-building"></i></a></button>

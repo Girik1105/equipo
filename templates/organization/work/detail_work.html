@@ -57,7 +57,7 @@
 {% block maincontent %}
 <div class="container">
     <div class="mt-2 mb-2">
-        {% if user == work.assigned_to %}<a class="blue-btn-org" href="{% url 'org:update-work' pk=work.pk  slug=item.slug %}">Complete</a>{% endif %}
+        {% if user == work.assigned_to %}<h1 class="title-text">Send Work:</h1><a class="blue-btn-org" href="{% url 'org:update-work' pk=work.pk  slug=item.slug %}">Complete</a>{% endif %}
         {% if user == item.owner or user in item.admins.all %}<a class="scope-btn" href="{% url 'org:edit-work' pk=work.pk  slug=item.slug %}">Edit</a>{% endif %}
     </div>
 

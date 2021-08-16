@@ -10,6 +10,10 @@ from django.db.models import Q
 
 from . import forms, models
 from accounts import models as account_models
+
+from django.core.mail import send_mail
+from django.utils import timezone 
+
 # Create your views here.
 
 @login_required
@@ -68,7 +72,7 @@ def detail_organization(request, slug):
 
     org = get_object_or_404(models.organization, slug=slug)
     work = models.work.objects.filter(organization=org)
-    members = models.Member.objects.filter(organization=org)
+    members = models.Member.objects.filter(organization=org, is_verified=True)
     unverified_members = models.Member.objects.filter(organization=org, is_verified=False)
 
     if not models.Member.objects.filter(organization=org, user=request.user, is_verified=True).exists():
@@ -85,6 +89,14 @@ def detail_organization(request, slug):
                     form.instance.organization = org
                     form.instance.is_verified = False
                     form.save(commit=True)
+
+                    send_mail(
+                        subject=f"You were added to { org.name }",
+                        message=f"You have been add as a member in { org.name }. please go to your dashboard to verify your membership. \n Organisation details: \n Name: { org.name } \n Description: { org.description } \n Members: { org.members.all().count() }",
+                        from_email='test@test.com',
+                        recipient_list=[form.instance.user.email]
+                    )
+
                     return redirect(reverse('org:detail-org', kwargs={"slug":org.slug}))
             else:
                 return redirect(reverse('org:detail-org', kwargs={"slug":org.slug}))
@@ -123,6 +135,12 @@ def create_work(request, slug):
                 form.instance.organization = org
                 form.instance.creator = request.user
                 form.save()
+                send_mail(
+                    subject=f"Work assigned in { org.name }",
+                    message=f"You have been assigned with some work. Go to { org.name }'s page to view it. \n Work Details: \n Title: { form.instance.title } \n Description: { form.instance.description } \n Due: { form.instance.due_date }",
+                    from_email='test@test.com',
+                    recipient_list=[form.instance.assigned_to.email]
+                )
                 return redirect(reverse('org:detail-org', kwargs={"slug":org.slug}))
             else:
                 return redirect(reverse('org:detail-org', kwargs={"slug":org.slug}))
@@ -191,7 +209,12 @@ def update_work(request, pk, slug):
             if form.is_valid():
                 form.save(commit=False)
                 form.instance.organization = org
-                form.instance.creator = request.user
+                send_mail(
+                    subject=f"Work assigned by you is completed",
+                    message=f"The work you assigned by you to { request.user.profile.name } is completed . Go to { org.name }'s page to view it. \n Work Details: \n Title: { form.instance.title } \n Description: { form.instance.description } \n Date completed: { timezone.now().date() }",
+                    from_email='test@test.com',
+                    recipient_list=[form.instance.assigned_to.email]
+                )
                 form.save()
                 return redirect(reverse('org:detail-org', kwargs={"slug":org.slug}))
             else:

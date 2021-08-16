@@ -134,6 +134,9 @@
           <a href="{% url 'org:detail-work' pk=work.pk  slug=item.slug %}" class="blue-btn-org">Details <i class="bi bi-file-earmark-text"></i></a>
           </div>
       </div>
+                  
+      {% empty %}
+      <p>No Work added!</p>
     {% endfor %}
   </div>
 </div>

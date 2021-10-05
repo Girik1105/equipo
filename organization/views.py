@@ -43,9 +43,11 @@ def create_organization(request):
 def update_organization(request, slug): 
 
     org = get_object_or_404(models.organization, slug=slug)
+    members = models.Member.objects.filter(organization=org, is_verified=True)
 
     kwargs = {}
-    kwargs.update({"org": org})
+    kwargs.update({"org": org, "members":members})
+    # kwargs.update({"members": members})
     org_form = forms.update_organization_form(instance=org, **kwargs)
 
     if request.user == org.owner:
@@ -119,12 +121,14 @@ def detail_organization(request, slug):
 @login_required
 def create_work(request, slug):
     org = models.organization.objects.get(slug=slug)
+    members = models.Member.objects.filter(organization=org, is_verified=True)
 
     if not request.user == org.owner or request.user in org.admins.all():
         raise Http404
 
     kwargs = {}
     kwargs.update({"org": org})
+    # kwargs.update({"members": members})
     form = forms.create_work_form(**kwargs)
 
     if request.method == "POST":
@@ -162,7 +166,7 @@ def edit_work(request, slug, pk):
 
     work = models.work.objects.get(organization=org, pk=pk)
 
-    if not request.user == org.owner or request.user in org.admins.all():
+    if not request.user == org.owner or request.user not in org.admins.all():
         raise Http404
 
     kwargs = {}

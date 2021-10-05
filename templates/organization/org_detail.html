@@ -167,8 +167,8 @@
   {% if user == item.owner or user in item.admin.all %}
     <div class="db-btn-holder"><button class="blue-btn-org scope-btn"><a href="{% url 'org:update-org' item.slug %}">Edit Organization</a></button></div>
     <div class="db-btn-holder"><button class="blue-btn-org org-btn-enlarge"><a href="{% url 'org:create-work' item.slug %}">Add Work</a></button></div>
+    {% endif %}
     <div class="db-btn-holder"><button class="blue-btn-org status-red"><a href="{% url 'org:leave-org' item.slug %}">Leave {{ item.name }}</a></button></div>
-  {% endif %}
   <div class="org-stats">
 
       <h1 class="text-title">Stats</h1>

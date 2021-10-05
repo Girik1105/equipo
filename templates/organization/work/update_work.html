@@ -56,6 +56,7 @@
 
 {% block maincontent %}
 <div class="container">
+  <h1 class="title-text">Send and complete work</h1>
     <form method="POST" enctype="multipart/form-data">
         {% bootstrap_form form %}
         {% csrf_token %}

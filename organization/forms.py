@@ -17,10 +17,11 @@ class update_organization_form(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         org = kwargs.pop('org')
+        members = kwargs.pop('members')
         super(update_organization_form, self).__init__(*args, **kwargs)
-        self.fields['owner'].queryset = org.members
-        self.fields['admins'].queryset = org.members
-        self.fields['members'].queryset = org.members
+        self.fields['owner'].queryset = members
+        self.fields['admins'].queryset = members
+        self.fields['members'].queryset = members
         
 
 class add_member(forms.ModelForm):

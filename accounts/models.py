@@ -11,8 +11,8 @@ class user_profile(models.Model):
     user = models.OneToOneField(User, primary_key=True, related_name='profile', on_delete=models.CASCADE)
     name = models.CharField(max_length = 150, blank = True, null = True)
 
-    profile_picture = models.ImageField(upload_to='uploads/profile_pictures', default='defaults/profile_pictures/default.png', blank=True)
-    background = models.ImageField(upload_to='uploads/profile_background', default='defaults/profile_background/default.jpg', blank=True)
+    profile_picture = models.ImageField(upload_to='uploads/profile_pictures', default='uploads/profile_pictures/default.png', blank=True)
+    background = models.ImageField(upload_to='uploads/profile_background', default='uploads/profile_background/default.jpg', blank=True)
 
     GENDER_CHOICES = (
         ('', 'Choose Your Gender'),

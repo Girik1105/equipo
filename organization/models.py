@@ -20,7 +20,7 @@ class organization(models.Model):
     owner = models.ForeignKey(User, related_name='admin', on_delete= models.CASCADE)
     admins = models.ManyToManyField(User, blank=True, related_name='group_moderators')
     members = models.ManyToManyField(User, through='Member')
-    cover = models.ImageField(upload_to='uploads/covers', default='uploads/covers/default.jpg', blank=True)
+    cover = models.ImageField(upload_to='uploads/covers', default='uploads/covers/default.jpg')
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

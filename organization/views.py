@@ -217,7 +217,7 @@ def update_work(request, pk, slug):
                     subject=f"Work assigned by you is completed",
                     message=f"The work you assigned by you to { request.user.profile.name } is completed . Go to { org.name }'s page to view it. \n Work Details: \n Title: { form.instance.title } \n Description: { form.instance.description } \n Date completed: { timezone.now().date() }",
                     from_email='test@test.com',
-                    recipient_list=[form.instance.assigned_to.email]
+                    recipient_list=[form.instance.creator.email]
                 )
                 form.save()
                 return redirect(reverse('org:detail-org', kwargs={"slug":org.slug}))

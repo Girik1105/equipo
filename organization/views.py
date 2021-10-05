@@ -46,7 +46,7 @@ def update_organization(request, slug):
     members = models.Member.objects.filter(organization=org, is_verified=True)
 
     kwargs = {}
-    kwargs.update({"org": org, "members":members})
+    kwargs.update({"org": org})
     # kwargs.update({"members": members})
     org_form = forms.update_organization_form(instance=org, **kwargs)
 
